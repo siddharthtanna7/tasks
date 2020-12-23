@@ -12,10 +12,8 @@ spec:
       rego: |
         package k8sdenyingress 
         violation [{"msg": msg}] {
-          some i
-          input.review.object.kind == "NetworkPolicy"
-          input.review.object.spec.ingress[i].from[i].podSelector.matchLabels.type == "frontend"
-          msg := "frontend is not allowed"
-
+          input.review.object.spec.podSelector.matchLabels.app == "mysql"
+          input.review.object.spec.ingress[_].from[_].podSelector.matchLabels.app != "webserver"
+          msg := "Cannot allow ingress access for the selected pod."
         }
 

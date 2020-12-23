@@ -1,15 +1,15 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-        name: enforce-namespace
-        namespace: admin
+        name: ingress-apply
+        namespace: backend
         labels:
                 type: policy
 
 spec:
         podSelector:
                 matchLabels:
-                        access: admin
+                        access: user
         policyTypes:
                 - Ingress
         ingress: [] 

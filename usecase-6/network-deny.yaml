@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress
+  namespace: frontend
+spec:
+  podSelector: 
+    matchLabels:
+            app: webserver
+  egress:
+  - ports: 
+     - port: 6739
+       protocol: TCP
