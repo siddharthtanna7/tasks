@@ -20,8 +20,8 @@ spec:
         package k8sdenyegress 
         violation [{"msg": msg}] {
             input.review.object.kind == "NetworkPolicy"
-            cidr_or_ip := {ip | ip:= input.review.object.spec.egress[_].to[_].ipBlock.cidr} 
-            cidr :=  {ip | ip:= input.parameters.cidr[_]}
+            cidr_or_ip :=  {ip | ip:= input.review.object.spec.egress[_].to[_].ipBlock.cidr} 
+            cidr :=   {ip | ip:= input.parameters.cidr[_]}
             value := net.cidr_contains(cidr, cidr_or_ip)
             not(value)
             msg := "The specified IP is not allowed." }
